@@ -12,7 +12,3 @@ export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1200;
 `;
-
-export const StyledModal = styled.div`
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-`;

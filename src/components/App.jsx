@@ -8,7 +8,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import { getImages } from './services/pixabay_api';
 import { LoadMoreBtn } from './Button/Button';
-import { LoaderWrapper } from './Loader/Loader.styled';
+import { Box } from './Box';
 
 export class App extends Component {
   state = {
@@ -73,7 +73,7 @@ export class App extends Component {
           </ImageGallery>
         )}
         {isLoading && (
-          <LoaderWrapper>
+          <Box display="flex" mt="20px" justifyContent="center">
             <RotatingLines
               strokeColor="#303f9f"
               strokeWidth="5"
@@ -81,7 +81,7 @@ export class App extends Component {
               width="96"
               visible={true}
             />
-          </LoaderWrapper>
+          </Box>
         )}
         {images.length > 0 && !isLoading && (
           <LoadMoreBtn text="Load More" onClick={this.handleMoreSearch} />
