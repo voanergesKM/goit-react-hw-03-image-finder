@@ -17,6 +17,7 @@ export class App extends Component {
     images: [],
     isLoading: false,
     error: null,
+    isMoreBtnHide: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -25,10 +26,14 @@ export class App extends Component {
     if (prevState.searchQuerry !== searchQuerry || prevState.page !== page) {
       getImages(searchQuerry, page)
         .then(data => {
+          if (data.hits.length < 12) {
+            this.setState({ isMoreBtnHide: true });
+          }
           if (data.total === 0) {
             this.setState({ isLoading: false });
             return toast.info('Sorry, nothing was found for your search');
           }
+
           this.setState(prevState => ({
             images: [...prevState.images, ...data.hits],
             isLoading: false,
@@ -47,6 +52,7 @@ export class App extends Component {
       page: 1,
       images: [],
       isLoading: true,
+      isMoreBtnHide: false,
     });
   };
 
@@ -58,7 +64,7 @@ export class App extends Component {
   };
 
   render() {
-    const { isLoading, images } = this.state;
+    const { isLoading, images, isMoreBtnHide } = this.state;
 
     return (
       <>
@@ -83,7 +89,7 @@ export class App extends Component {
             />
           </Box>
         )}
-        {images.length > 0 && !isLoading && (
+        {images.length > 0 && !isLoading && !isMoreBtnHide && (
           <LoadMoreBtn text="Load More" onClick={this.handleMoreSearch} />
         )}
         <ToastContainer
