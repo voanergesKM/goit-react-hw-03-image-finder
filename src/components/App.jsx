@@ -64,12 +64,16 @@ export class App extends Component {
   };
 
   render() {
-    const { isLoading, images, isMoreBtnHide } = this.state;
+    const { isLoading, images, isMoreBtnHide, searchQuerry } = this.state;
 
     return (
       <>
         <SearchBar>
-          <SearchForm onSubmit={this.handleSubmit} isLoading={isLoading} />
+          <SearchForm
+            onSubmit={this.handleSubmit}
+            isLoading={isLoading}
+            searchQuerry={searchQuerry}
+          />
         </SearchBar>
         {images.length > 0 && (
           <ImageGallery>

@@ -33,6 +33,27 @@ export class SearchForm extends Component {
       return;
     }
 
+    if (this.props.searchQuerry === searchInput.trim()) {
+      toast.info(
+        `The images you requested ${this.props.searchQuerry} have already been found and displayed`,
+        {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+
+      this.setState({
+        searchInput: '',
+      });
+
+      return;
+    }
+
     this.props.onSubmit(searchInput.trim());
 
     this.setState({
